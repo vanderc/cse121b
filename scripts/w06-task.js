@@ -1,14 +1,23 @@
 let weather = document.getElementById("weatherDiv");
 let searchButton = document.getElementById("search");
-let cityReference = document.getElementById("city");
+let cityRef = document.getElementById("city");
 let key = "b4f039a7f4409449f111d776279a66e0";
+
+function getTime(time) {
+  let date = new Date(time * 1000);
+  // console.log(date);
+  return date;
+}
+
+
+
 
 
 let getWeather = (city) => {
   let lat = city[0].lat;
   let lon = city[0].lon;
   let url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${key}`;
-  cityReference.value = "";
+  cityRef.value = "";
   fetch(url)
     .then((resp) => resp.json())
     .then((data) => {
@@ -26,12 +35,12 @@ let getWeather = (city) => {
       <h3>${data.daily[0].temp.max}&#176;F</h3>`;
     }) 
     .catch(() => {
-      weather.innerHTML = `<h3 class="msg">Please try again</h3>`;
+      weather.innerHTML = `<h3 class="msg">City not found</h3>`;
     });
 };
 
 async function getCityData() {
-  let cityValue = cityReference.value;
+  let cityValue = cityRef.value;
   if (cityValue.length == 0) {
     weather.innerHTML = `<h3 class="msg">Please enter a city name</h3>`;
   }
@@ -41,6 +50,5 @@ async function getCityData() {
     getWeather(cityOutput);
   }
 };
-
 
 search.addEventListener("click", getCityData);
