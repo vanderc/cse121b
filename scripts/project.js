@@ -42,4 +42,5 @@ async function getCityData() {
   }
 };
 
+
 search.addEventListener("click", getCityData);
