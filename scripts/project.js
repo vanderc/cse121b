@@ -33,7 +33,7 @@ async function getCityData() {
     weather.innerHTML = `<h3 class="msg">Please enter a city name</h3>`;
   }
   else {
-    let response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=1&appid=${key}`);
+    let response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${cityValue}&limit=1&appid=${key}`);
     let cityOutput = await response.json();
     getWeather(cityOutput);
   }
