@@ -8,7 +8,7 @@ let getWeather = (city) => {
   let lat = city[0].lat;
   let lon = city[0].lon;
   cityReference.value = "";
-  fetch(`http://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${key}`)
+  fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${key}`)
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
