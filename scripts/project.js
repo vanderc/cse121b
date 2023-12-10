@@ -1,5 +1,5 @@
 let weather = document.getElementById("weatherDiv");
-let searchButton = document.getElementById("search");
+let searchBtn = document.getElementById("search");
 let cityReference = document.getElementById("city");
 let key = "b4f039a7f4409449f111d776279a66e0";
 
@@ -7,22 +7,19 @@ let key = "b4f039a7f4409449f111d776279a66e0";
 let getWeather = (city) => {
   let lat = city[0].lat;
   let lon = city[0].lon;
-  let url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${key}`;
   cityReference.value = "";
-  fetch(url)
+  fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${key}`)
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data);
       weather.innerHTML = 
       `<h1>Weather for ${city[0].name}</h1>
-      <h2>Forecast for Today</h2>
-      <h3>${data.current.weather[0].description}</h3>
-      <img src="https://openweathermap.org/img/w/${data.current.weather[0].icon}.png">
+      <h2>Todays Forecast</h2>
       <h2>Current Temperature</h2>
       <h3>${data.current.temp}&#176;F</h3>
-      <h2>Today's Min</h2>
+      <h2>Today's Minimum Temperature</h2>
       <h3>${data.daily[0].temp.min}&#176;F</h3>
-      <h2>Today's Max</h2>
+      <h2>Today's Maximum Temperature</h2>
       <h3>${data.daily[0].temp.max}&#176;F</h3>`;
     }) 
     .catch(() => {
